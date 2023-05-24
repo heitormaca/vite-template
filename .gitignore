@@ -2,7 +2,6 @@
 logs
 *.log
 pnpm-debug.log*
-.pnpm-lock
 
 node_modules
 dist
