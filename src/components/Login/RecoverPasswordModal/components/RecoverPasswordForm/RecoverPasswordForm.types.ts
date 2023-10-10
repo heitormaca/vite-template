@@ -2,7 +2,7 @@ export interface RecoverPasswordFormValues {
   email: string;
 }
 
-export type Props = {
+export type RecoverPasswordFormProps = {
   email: string;
-  onFinish: (values: RecoverPasswordFormValues) => void;
+  onFinish: VoidFunction;
 };

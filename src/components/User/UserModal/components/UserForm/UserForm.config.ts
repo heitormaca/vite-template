@@ -4,8 +4,5 @@ export const userFormInitialValues: UserFormValues = {
   name: '',
   email: '',
   password: '',
-  id: '',
-  imageUri: '',
-  supplierName: '',
   profile: '',
 };

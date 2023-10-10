@@ -2,7 +2,7 @@ import { createStyles } from '@mantine/core';
 
 export const useHeaderStyle = createStyles((theme) => ({
   header: {
-    width: '100%',
+    width: '100vw',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'stretch',
@@ -24,7 +24,7 @@ export const useHeaderStyle = createStyles((theme) => ({
     display: 'none',
 
     [theme.fn.smallerThan('sm')]: {
-      display: 'flex',
+      display: 'block',
     },
   },
 }));

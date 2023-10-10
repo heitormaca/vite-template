@@ -1,6 +1,6 @@
 import { useForm } from '@mantine/form';
 import { Props } from './UserForm.types';
-import { useCreateUser, useEditUser } from '@/core/domains/users/user.hooks';
+import { useCreateUser, useUserEdit } from '@/core/domains/users/user.hooks';
 import { useEffect } from 'react';
 import { UserFormValues } from '@/core/domains/users/user.types';
 import { Button, Group, Stack, TextInput } from '@mantine/core';
@@ -12,7 +12,7 @@ const UserForm: React.FC<Props> = (props) => {
     initialValues: userFormInitialValues,
   });
   const userCreate = useCreateUser();
-  const userEdit = useEditUser();
+  const userEdit = useUserEdit();
 
   useEffect(() => {
     if (props.user) {
@@ -30,17 +30,16 @@ const UserForm: React.FC<Props> = (props) => {
   async function handleSubmit(values: UserFormValues) {
     if (props.user) {
       await userEdit.mutateAsync({
-        id: props.user.id,
-        name: values.email,
-        supplierName: values.supplierName || undefined,
-        imageUri: values.imageUri || undefined,
+        id: Number(props.user.id),
+        name: values.name,
+        email: values.email,
+        profile: props.user.profile,
+        status: props.user.status,
       });
     } else {
       await userCreate.mutateAsync({
         name: values.name,
-        supplierName: values.supplierName,
         email: values.email,
-        imageUri: values.imageUri,
         profile: Number(values.profile),
         password: values.password,
       });

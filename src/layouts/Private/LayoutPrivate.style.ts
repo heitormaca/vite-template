@@ -5,4 +5,8 @@ export const useLayoutPrivateStyle = createStyles((theme) => ({
     backgroundColor:
       theme.other.layoutPrivate[theme.colorScheme].backgroundColor,
   },
+
+  root: {
+    overflowX: 'hidden',
+  },
 }));

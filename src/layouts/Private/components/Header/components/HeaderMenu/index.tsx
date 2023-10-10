@@ -5,13 +5,9 @@ import { NavbarItem } from '@/layouts/Private/components/Navbar/components';
 import { useNavbarStyle } from '@/layouts/Private/components/Navbar/Navbar.style';
 import { useEffect } from 'react';
 import { useLayoutContext } from '@/layouts/Private';
+import { HeaderMenuProps } from './HeaderMenu.types';
 
-type Props = {
-  opened: boolean;
-  onClose: VoidFunction;
-};
-
-const HeaderMenu: React.FC<Props> = ({ opened, onClose }) => {
+const HeaderMenu: React.FC<HeaderMenuProps> = ({ opened, onClose }) => {
   const { classes } = useNavbarStyle();
   const rootRoutes = useRouperRoutes()[0];
   const appRoutes =
@@ -39,12 +35,12 @@ const HeaderMenu: React.FC<Props> = ({ opened, onClose }) => {
     <Portal>
       <Navbar
         width={{
-          base: '100%',
+          base: '100vw',
         }}
         classNames={classes}
       >
         <Navbar.Section grow component={ScrollArea}>
-          <Stack m="xl">
+          <Stack py="xl">
             {appRoutes.map((route) => (
               <NavbarItem
                 key={route.path}

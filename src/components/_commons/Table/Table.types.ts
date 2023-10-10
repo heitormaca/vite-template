@@ -35,3 +35,10 @@ export type TableBodyProps<D> = {
   loading?: boolean;
   empty?: React.ReactNode;
 };
+
+export type TableHeaderProps = {
+  title: string;
+  description: string;
+  btnName?: string;
+  onClick?: VoidFunction;
+};

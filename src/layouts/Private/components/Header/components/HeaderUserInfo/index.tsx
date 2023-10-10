@@ -1,4 +1,3 @@
-import { useAuthContext } from '@/core/auth';
 import { useLayoutContext } from '@/layouts/Private';
 import {
   Box,
@@ -6,22 +5,16 @@ import {
   Avatar,
   Text,
   UnstyledButton,
-  UnstyledButtonProps,
   useMantineTheme,
 } from '@mantine/core';
 import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
 import { forwardRef } from 'react';
+import { HeaderUserInfoProps } from './HeaderUserInfo.types';
 
-interface Props extends UnstyledButtonProps {
-  opened?: boolean;
-  showInfo?: boolean;
-}
-
-const HeaderUserInfo = forwardRef<HTMLButtonElement, Props>(
-  ({ opened, showInfo, ...props }, ref) => {
+const HeaderUserInfo = forwardRef<HTMLButtonElement, HeaderUserInfoProps>(
+  ({ opened, showInfo, name, ...props }, ref) => {
     const { isMobile } = useLayoutContext();
-    const { user } = useAuthContext();
-    const initialName = user?.name?.slice(0, 1).toUpperCase();
+    const initialName = name.slice(0, 1).toUpperCase();
     const { colorScheme } = useMantineTheme();
     const displayInfo = showInfo || (!showInfo && !isMobile);
 
@@ -32,7 +25,7 @@ const HeaderUserInfo = forwardRef<HTMLButtonElement, Props>(
             radius="xl"
             size={40}
             variant="filled"
-            color={colorScheme === 'dark' ? 'gray.7' : 'gray.3'}
+            color={colorScheme === 'dark' ? 'gray.7' : 'primary'}
           >
             {initialName}
           </Avatar>
@@ -41,7 +34,7 @@ const HeaderUserInfo = forwardRef<HTMLButtonElement, Props>(
             <Group spacing="md">
               <Box>
                 <Text weight="bold" size="sm">
-                  {user?.name}
+                  {name}
                 </Text>
               </Box>
               {!isMobile && (

@@ -17,6 +17,12 @@ const defaultProps: Partial<ModalProps> = {
         height: '100vh',
       },
     },
+    body: {
+      backgroundColor: '#F5F5F5',
+    },
+    header: {
+      backgroundColor: '#F5F5F5',
+    },
   }),
   padding: 'lg',
 };

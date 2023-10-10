@@ -1,90 +1,74 @@
-import { Table } from '@/components/_commons';
-import { useDeleteUser, useUsers } from '@/core/domains/users/user.hooks';
-import { User } from '@/core/domains/users/user.types';
-import { ActionIcon, Avatar, Group, Text } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { useModals } from '@mantine/modals';
-import { IconEdit, IconTrash } from '@tabler/icons-react';
-import { useEffect, useState } from 'react';
-import UserModal from '../UserModal';
-import { TableColumn } from '@/components/_commons/Table/Table.types';
-import { useQueryParams } from '@/core/hooks';
 import { Props } from './UserList.types';
 
 const UserList: React.FC<Props> = ({ filters }) => {
-  const [params, setParams] = useQueryParams(filters);
-  const { data, isLoading } = useUsers({ ...params });
-  const userRemove = useDeleteUser();
+  console.log(filters);
+  // const [params, setParams] = useQueryParams(filters);
+  // const modals = useModals();
 
-  const [user, setUser] = useState<User>();
-  const [modalOpened, modalAction] = useDisclosure(false, {
-    onClose: () => setUser(undefined),
-  });
-  const modals = useModals();
+  // const { data, isLoading } = useUsers({ ...params });
+  // const userRemove = useDeleteUser();
 
-  function confirmRemove(item: User) {
-    modals.openConfirmModal({
-      title: 'Remoção de usuário',
-      children: `Tem certeza que deseja remover o usuário "${item.name}" ?`,
-      confirmProps: {
-        onClick: () => userRemove.mutateAsync(item.id),
-        children: 'Remover',
-      },
-      cancelProps: {
-        children: 'Cancelar',
-      },
-    });
-  }
+  // const [user, setUser] = useState<User>();
+  // const [modalOpened, modalAction] = useDisclosure(false);
 
-  const columns: TableColumn<User>[] = [
-    {
-      key: 'name',
-      title: 'Nome',
-      render: (item) => (
-        <Group spacing="sm">
-          <Avatar radius="xl">
-            {typeof item.imageUri === 'string'
-              ? item.imageUri
-              : item.name.charAt(0).toUpperCase()}
-          </Avatar>
-          <Text>{item.name}</Text>
-        </Group>
-      ),
-    },
-    {
-      key: 'email',
-      title: 'E-mail',
-    },
-    {
-      title: 'Ação',
-      align: 'right',
-      render: (item) => (
-        <Group position="right" spacing="sm">
-          <ActionIcon
-            onClick={() => {
-              setUser(item);
-              modalAction.open();
-            }}
-          >
-            <IconEdit />
-          </ActionIcon>
-          <ActionIcon color="red" onClick={() => confirmRemove(item)}>
-            <IconTrash />
-          </ActionIcon>
-        </Group>
-      ),
-    },
-  ];
+  // function confirmRemove(item: User) {
+  //   modals.openConfirmModal({
+  //     title: 'Remoção de usuário',
+  //     children: `Tem certeza que deseja remover o usuário "${item.name}" ?`,
+  //     confirmProps: {
+  //       onClick: () => userRemove.mutateAsync(String(item.id)),
+  //       children: 'Remover',
+  //     },
+  //     cancelProps: {
+  //       children: 'Cancelar',
+  //     },
+  //   });
+  // }
 
-  useEffect(() => {
-    if (filters) {
-      setParams(filters);
-    }
-  }, [filters]);
+  // const columns: TableColumn<User>[] = [
+  //   {
+  //     key: 'name',
+  //     title: 'Nome',
+  //     render: (item) => (
+  //       <Group spacing="sm">
+  //         <Avatar radius="xl">
+  //           {/* {typeof item.imageUri === 'string'
+  //             ? item.imageUri
+  //             : item.name.charAt(0).toUpperCase()} */}
+  //         </Avatar>
+  //         <Text>{item.name}</Text>
+  //       </Group>
+  //     ),
+  //   },
+  //   {
+  //     key: 'email',
+  //     title: 'E-mail',
+  //   },
+  //   {
+  //     title: 'Ação',
+  //     align: 'right',
+  //     render: (item) => (
+  //       <Group position="right" spacing="sm">
+  //         <ActionIcon
+  //           onClick={() => {
+  //             setUser(item);
+  //             modalAction.open();
+  //           }}
+  //         >
+  //           <IconEdit />
+  //         </ActionIcon>
+  //         <ActionIcon color="red" onClick={() => confirmRemove(item)}>
+  //           <IconTrash />
+  //         </ActionIcon>
+  //       </Group>
+  //     ),
+  //   },
+  // ];
 
   return (
     <>
-      <Table<User>
+      {/* <Table<User>
+        width={400}
         loading={isLoading}
         data={data?.items || []}
         columns={columns}
@@ -93,9 +77,18 @@ const UserList: React.FC<Props> = ({ filters }) => {
           value: data?.pagination.page,
           onChange: (page) => setParams({ page }),
         }}
-      />
+                  <TableHeader
+            title="Usuarios"
+            description="Gerencie todas os usuários da plataforma"
+            btnName="Novo Usuário"
+            onClick={() => {
+              setUser(undefined);
+              modalAction.open();
+            }}
+          />
+      /> */}
 
-      <UserModal opened={modalOpened} onClose={modalAction.close} user={user} />
+      {/* <UserModal opened={modalOpened} onClose={modalAction.close} user={user} /> */}
     </>
   );
 };

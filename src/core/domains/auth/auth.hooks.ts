@@ -27,7 +27,7 @@ export function useAuthLogin() {
 
         rouperClient.setClaims([AuthRole.AUTHORIZED]);
 
-        navigate('/app');
+        navigate('/app/users');
       } else {
         showNotificationError(
           null,

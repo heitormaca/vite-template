@@ -2,31 +2,30 @@ import { ResponsePagination } from '@/core/types/api.service';
 import { Profile } from '../auth/auth.types';
 
 export interface User {
-  id: string;
+  id: number;
   name: string;
-  imageUri: string | null;
-  supplierName: string | null;
   email: string;
-  profile: Profile;
-  status: Status;
+  profile: number;
+  status: number;
 }
+
+export type RecoverPassword = {
+  email: string;
+};
+
+export type UpdatePassword = {
+  code: string;
+  newPassword: string;
+  confirmPassword: string;
+};
 
 export type UserListResponse = ResponsePagination<User>;
 
 export interface UserCreateRequest {
   name?: string;
-  supplierName: string | null;
   email?: string;
-  imageUri: string | null;
   profile?: Profile;
   password?: string;
-}
-
-export interface UserEditRequest {
-  id?: string;
-  name?: string;
-  imageUri?: string;
-  supplierName?: string;
 }
 
 export enum Status {
@@ -34,7 +33,13 @@ export enum Status {
   Inactive = 0,
 }
 
-export type UserFormValues = Omit<User, 'profile' | 'status'> & {
+export type UserFormValues = Omit<User, 'profile' | 'status' | 'id'> & {
   profile: string;
   password: string;
+};
+
+export type UserEdit = {
+  id: number;
+  name: string;
+  profile: number;
 };

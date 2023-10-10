@@ -1,4 +1,4 @@
-import { SelectProps, ThemeComponent } from '@mantine/core';
+import { SelectProps, ThemeComponent, ChevronIcon } from '@mantine/core';
 
 function replaceNonNumerics(arg: string) {
   return Number(arg.replaceAll(/\D/g, ''));
@@ -6,6 +6,7 @@ function replaceNonNumerics(arg: string) {
 
 const defaultProps: Partial<SelectProps> = {
   withinPortal: true,
+  rightSection: <ChevronIcon />,
   styles: (theme) => ({
     root: {
       display: 'flex',
@@ -23,6 +24,17 @@ const defaultProps: Partial<SelectProps> = {
     description: {
       order: 3,
       marginTop: replaceNonNumerics(theme.spacing.xs) / 2,
+    },
+    rightSection: {
+      color: theme.colors.primary,
+
+      svg: {
+        color: 'inherit !important',
+      },
+    },
+
+    label: {
+      fontSize: theme.fontSizes.sm,
     },
   }),
 };

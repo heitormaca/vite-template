@@ -19,12 +19,11 @@ export default {
       '#305940',
     ],
   },
+  fontFamily: 'Roboto, sans-serif',
   black: '#101113',
-
   primaryColor: 'blue',
   colorScheme: 'light',
   primaryShade: { light: 6, dark: 6 },
-
   other: {
     headerHeight: 60,
     layoutPrivate: {

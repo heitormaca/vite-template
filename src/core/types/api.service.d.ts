@@ -20,8 +20,11 @@ export interface ResponsePagination<T> {
 
 export interface ResponseError {
   name: string;
-  fieldErrors: Record<string, string[]>;
-  description: string;
+  fieldErrors: {
+    key: string;
+    value: string[];
+  }[];
+  message: string;
 }
 
 export type AxiosResponseError = AxiosError<ResponseError>;

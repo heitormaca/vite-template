@@ -3,6 +3,9 @@ import { redirect } from 'react-router-dom';
 import { authClient } from '@/core/auth';
 import { LoginPage } from '@/pages/Public';
 import { isValidToken } from '@/core/utils/functions';
+import ResetPasswordPage, {
+  loader as resetPasswordLoader,
+} from '@/pages/Public/ResetPasswordPage';
 
 export default [
   {
@@ -18,5 +21,10 @@ export default [
 
       return null;
     },
+  },
+  {
+    path: 'resetPassword/:codeId',
+    element: <ResetPasswordPage />,
+    loader: resetPasswordLoader,
   },
 ] as RouteObjectPermission[];

@@ -1,5 +1,6 @@
 import {
   ActionIcon,
+  Box,
   Group,
   Header,
   Image,
@@ -11,6 +12,7 @@ import { useLayoutContext } from '../..';
 import { HeaderDropdown } from './components';
 import HeaderMenu from './components/HeaderMenu';
 import { useHeaderStyle } from './Header.style';
+import { useEffect } from 'react';
 
 const LayoutPrivateHeader: React.FC = () => {
   const { classes } = useHeaderStyle();
@@ -18,6 +20,14 @@ const LayoutPrivateHeader: React.FC = () => {
   const [menuOpened, toggleMenu] = useToggle();
   const theme = useMantineTheme();
   const brandScheme = theme.colorScheme === 'dark' ? 'light' : 'dark';
+
+  useEffect(() => {
+    if (menuOpened) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = '';
+    }
+  }, [menuOpened]);
 
   return (
     <>
@@ -36,18 +46,18 @@ const LayoutPrivateHeader: React.FC = () => {
         </Group>
 
         <Group position="apart" sx={{ flex: 1 }} px="xl">
-          <Group>
+          <Box className={classes.headerMenuAction}>
             <ActionIcon
               variant="default"
               size="lg"
               onClick={() => toggleMenu()}
-              className={classes.headerMenuAction}
             >
               <IconMenu2 />
             </ActionIcon>
-          </Group>
-
-          <HeaderDropdown />
+          </Box>
+          <Box sx={{ marginLeft: 'auto' }}>
+            <HeaderDropdown />
+          </Box>
         </Group>
       </Header>
 

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { UserListResponse } from './user.types';
+import { User, UserListResponse } from './user.types';
 import {
   AxiosResponseError,
   RequestPagination,
@@ -7,6 +7,45 @@ import {
 import userService from './user.service';
 import showNotificationError from '@/core/utils/notification/showNotificationError';
 import showNotificationSuccess from '@/core/utils/notification/showNorificationSuccess';
+import { useNavigate } from 'react-router-dom';
+
+export function useRecoverPassword() {
+  return useMutation(userService.recoverPass, {
+    onSuccess() {
+      showNotificationSuccess('Link de recuperação enviado com sucesso!');
+    },
+    onError(error) {
+      showNotificationError(error, 'Link de recuperação');
+    },
+  });
+}
+
+export function useUpdatePassword() {
+  const navigate = useNavigate();
+  return useMutation(userService.updatePass, {
+    onSuccess() {
+      showNotificationSuccess('A senha foi alterada com sucesso!');
+      navigate('/');
+    },
+
+    onError(error) {
+      showNotificationError(error, 'Alteração de senha');
+    },
+  });
+}
+
+export function useUserDetails(id: string) {
+  return useQuery<User, AxiosResponseError>(
+    ['user', id],
+    () => userService.details(id),
+    {
+      onError(error) {
+        showNotificationError(error, 'Detalhes de usuário');
+      },
+      enabled: !!id,
+    }
+  );
+}
 
 export function useUsers(params?: RequestPagination) {
   return useQuery<UserListResponse, AxiosResponseError>(
@@ -34,18 +73,21 @@ export function useCreateUser() {
   });
 }
 
-export function useEditUser() {
+export function useUserEdit() {
   const queryClient = useQueryClient();
 
-  return useMutation(userService.edit, {
-    onSuccess() {
-      queryClient.invalidateQueries(['users']);
-      showNotificationSuccess('Usuário editado');
-    },
-    onError(error) {
-      showNotificationError(error, 'Edição de usuário');
-    },
-  });
+  return useMutation<User, AxiosResponseError, User>(
+    (data) => userService.edit(data),
+    {
+      onSuccess() {
+        queryClient.invalidateQueries(['user']);
+        showNotificationSuccess('Perfil de usuário alterado com sucesso!');
+      },
+      onError(error) {
+        showNotificationError(error, 'Alteração de usuário');
+      },
+    }
+  );
 }
 
 export function useDeleteUser() {
@@ -60,4 +102,18 @@ export function useDeleteUser() {
       showNotificationError(error, 'Remoção de usuário');
     },
   });
+}
+
+export function useValidateCode(id: string) {
+  const navigate = useNavigate();
+
+  return useQuery<unknown, AxiosResponseError>(
+    ['validadeCode', id],
+    () => userService.validCode(id),
+    {
+      onError() {
+        navigate('/404');
+      },
+    }
+  );
 }

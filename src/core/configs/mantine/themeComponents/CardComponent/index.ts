@@ -1,9 +1,11 @@
 import { CardProps, ThemeComponent } from '@mantine/core';
 
 const defaultProps: Partial<CardProps> = {
-  p: 'lg',
+  py: '3rem',
+  px: '2rem',
+  shadow: 'none',
   withBorder: true,
-  radius: 'md',
+  radius: '0.625rem',
   sx: (theme) => ({
     backgroundColor:
       theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.white,
