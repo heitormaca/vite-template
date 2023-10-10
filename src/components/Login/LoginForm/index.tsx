@@ -1,7 +1,7 @@
 import { useForm } from '@mantine/form';
 import { LoginFormValues } from './LoginForm.types';
 import { loginFormValidate } from './LoginForm.config';
-// import { useAuthLogin } from '@/core/domains/auth/auth.hooks';
+import { useAuthLogin } from '@/core/domains/auth/auth.hooks';
 import { useDisclosure } from '@mantine/hooks';
 import {
   Box,
@@ -24,19 +24,15 @@ const LoginForm: React.FC = () => {
 
   const navigate = useNavigate();
 
-  // const authLogin = useAuthLogin();
+  const authLogin = useAuthLogin();
 
   const [modalOpened, modalAction] = useDisclosure(false);
 
-  // async function handleSubmit(values: LoginFormValues) {
-  //   const { hasErrors } = form.validate();
+  async function handleSubmit(values: LoginFormValues) {
+    const { hasErrors } = form.validate();
 
-  //   if (hasErrors) return;
-  //   authLogin.mutateAsync(values);
-  // }
-
-  function handleSubmit(values: LoginFormValues) {
-    console.log(values);
+    if (hasErrors) return;
+    authLogin.mutateAsync(values);
     navigate('/app');
   }
 
@@ -72,7 +68,7 @@ const LoginForm: React.FC = () => {
               <Button
                 type="submit"
                 rightIcon={<IconArrowNarrowRight />}
-                // loading={authLogin.isLoading}
+                loading={authLogin.isLoading}
               >
                 Acessar
               </Button>
