@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Box, Card, ScrollArea, Table as MTable } from '@mantine/core';
 import { cloneElement } from 'react';
 import TableBody from './Table.body';
 import TableHead from './Table.head';
 import { useTableStyles } from './Table.styles';
 import { TableProps } from './Table.types';
 import TablePagination from './Table.pagination';
+import { Box, Card, ScrollArea, Table as MTable } from '@mantine/core';
 
 function Table<D extends Record<string, any>>({
   data,
@@ -16,12 +15,10 @@ function Table<D extends Record<string, any>>({
   pagination,
   loading,
   empty,
+  width,
   ...props
 }: TableProps<D>) {
   const { classes, cx } = useTableStyles();
-  const tableWidht = columns?.reduce((prev, curr) => {
-    return prev + (curr.width || 100);
-  }, 0);
 
   function cloneTFoot() {
     if (tfootComponent) {
@@ -43,7 +40,7 @@ function Table<D extends Record<string, any>>({
           {...props}
           className={cx(classes.table, props.className)}
           style={{
-            width: !!data?.length ? tableWidht : undefined,
+            width: data?.length ? width : undefined,
             minWidth: '100%',
           }}
         >

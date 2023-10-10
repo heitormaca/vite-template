@@ -15,7 +15,7 @@ export function useAuthLogin() {
 
   return useMutation(authService.login, {
     onSuccess(data: AuthResponse) {
-      if (!!data) {
+      if (data) {
         const tokenData = jwtDecode<AuthTokenDecoded>(data.token);
         setAuthData({
           token: data.token,

@@ -1,6 +1,6 @@
-import { BadgeProps as MantineBadgesProps } from '@mantine/core';
+import { BadgeProps as MBadgesProps } from '@mantine/core';
 
-export type BadgeProps = MantineBadgesProps & {
+export type BadgeProps = MBadgesProps & {
   type: BadgeType;
 };
 

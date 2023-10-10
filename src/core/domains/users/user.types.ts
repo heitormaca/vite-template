@@ -29,7 +29,7 @@ export interface UserCreateRequest {
 }
 
 export enum Status {
-  Active = 0,
+  Active = 1,
   Inactive = 0,
 }
 

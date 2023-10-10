@@ -1,6 +1,6 @@
-import { CSSObject, MantineTheme } from '@mantine/core';
+import { CSSObject } from '@mantine/core';
 
-export default function (_theme: MantineTheme): CSSObject {
+export default function (): CSSObject {
   return {
     'svg.tabler-icon': {
       width: '1.15rem',

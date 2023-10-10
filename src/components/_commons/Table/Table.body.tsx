@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Loader, Stack, Text } from '@mantine/core';
 import { IconInbox } from '@tabler/icons-react';
 import { useTableStyles } from './Table.styles';
@@ -80,12 +79,12 @@ function TableBody<D extends Record<string, any>>({
               >
                 {column.tail ? (
                   <Text lineClamp={1}>
-                    {!!column.render ? column.render(item, trIndex) : null}
+                    {column.render ? column.render(item, trIndex) : null}
                     {!column.render && column.key ? item[column.key] : null}
                   </Text>
                 ) : (
                   <>
-                    {!!column.render ? column.render(item, trIndex) : null}
+                    {column.render ? column.render(item, trIndex) : null}
                     {!column.render && column.key ? item[column.key] : null}
                   </>
                 )}
