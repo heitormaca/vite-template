@@ -1,7 +1,7 @@
 import { useAuthContext } from '@/core/auth';
 import { useNavigate } from 'react-router-dom';
 import { useRouperClient } from 'rouper-navigation';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation } from 'react-query';
 import authService from './auth.service';
 import { AuthResponse } from './auth.types';
 import jwtDecode from 'jwt-decode';

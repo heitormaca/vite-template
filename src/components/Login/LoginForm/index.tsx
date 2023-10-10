@@ -1,7 +1,7 @@
 import { useForm } from '@mantine/form';
 import { LoginFormValues } from './LoginForm.types';
 import { loginFormValidate } from './LoginForm.config';
-import { useAuthLogin } from '@/core/domains/auth/auth.hooks';
+// import { useAuthLogin } from '@/core/domains/auth/auth.hooks';
 import { useDisclosure } from '@mantine/hooks';
 import {
   Box,
@@ -15,21 +15,29 @@ import {
 } from '@mantine/core';
 import { IconArrowNarrowRight, IconAt, IconLock } from '@tabler/icons-react';
 import RecoverPasswordModal from '../RecoverPasswordModal';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm: React.FC = () => {
   const form = useForm<LoginFormValues>({
     validate: loginFormValidate,
   });
 
-  const authLogin = useAuthLogin();
+  const navigate = useNavigate();
+
+  // const authLogin = useAuthLogin();
 
   const [modalOpened, modalAction] = useDisclosure(false);
 
-  async function handleSubmit(values: LoginFormValues) {
-    const { hasErrors } = form.validate();
+  // async function handleSubmit(values: LoginFormValues) {
+  //   const { hasErrors } = form.validate();
 
-    if (hasErrors) return;
-    authLogin.mutateAsync(values);
+  //   if (hasErrors) return;
+  //   authLogin.mutateAsync(values);
+  // }
+
+  function handleSubmit(values: LoginFormValues) {
+    console.log(values);
+    navigate('/app');
   }
 
   return (
@@ -64,7 +72,7 @@ const LoginForm: React.FC = () => {
               <Button
                 type="submit"
                 rightIcon={<IconArrowNarrowRight />}
-                loading={authLogin.isLoading}
+                // loading={authLogin.isLoading}
               >
                 Acessar
               </Button>

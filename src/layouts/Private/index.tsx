@@ -1,5 +1,5 @@
-import { useAuthContext } from '@/core/auth';
-import { useSignOut } from '@/core/hooks';
+// import { useAuthContext } from '@/core/auth';
+// import { useSignOut } from '@/core/hooks';
 import { AppShell, useMantineTheme } from '@mantine/core';
 import { useHotkeys, useLocalStorage, useViewportSize } from '@mantine/hooks';
 import { createContext, useContext, useEffect } from 'react';
@@ -29,14 +29,14 @@ const LayoutPrivate: React.FC = () => {
   });
   const theme = useMantineTheme();
   const { width } = useViewportSize();
-  const { tokenError } = useAuthContext();
-  const signOut = useSignOut();
+  // const { tokenError } = useAuthContext();
+  // const signOut = useSignOut();
 
-  useEffect(() => {
-    if (tokenError) {
-      signOut();
-    }
-  }, [tokenError]);
+  // useEffect(() => {
+  //   if (tokenError) {
+  //     signOut();
+  //   }
+  // }, [tokenError]);
 
   useHotkeys([
     ['ctrl+T', () => setLayoutParams({ collapsed: !params.collapsed })],
