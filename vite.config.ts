@@ -12,18 +12,17 @@ export default defineConfig({
     'process.env': {},
   },
   plugins: [react()],
-  server: { 
+  server: {
     proxy: {
       '/api': {
         target: process.env.VITE_API,
         changeOrigin: true,
       },
     },
-   },
+  },
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['./src/setupTests.ts'],
   },
   resolve: {
     alias: {
