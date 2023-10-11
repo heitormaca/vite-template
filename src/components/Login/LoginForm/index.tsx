@@ -15,14 +15,11 @@ import {
 } from '@mantine/core';
 import { IconArrowNarrowRight, IconAt, IconLock } from '@tabler/icons-react';
 import RecoverPasswordModal from '../RecoverPasswordModal';
-import { useNavigate } from 'react-router-dom';
 
 const LoginForm: React.FC = () => {
   const form = useForm<LoginFormValues>({
     validate: loginFormValidate,
   });
-
-  const navigate = useNavigate();
 
   const authLogin = useAuthLogin();
 
@@ -33,7 +30,6 @@ const LoginForm: React.FC = () => {
 
     if (hasErrors) return;
     authLogin.mutateAsync(values);
-    navigate('/app');
   }
 
   return (
