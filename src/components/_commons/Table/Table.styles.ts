@@ -6,7 +6,7 @@ export const useTableStyles = createStyles((theme) => {
       zIndex: 2,
     },
     wrapper: {
-      padding: `0px !important`,
+      padding: `2rem 1.5rem 1rem 2rem !important`,
     },
     filter: {
       borderBottom: `1px solid ${

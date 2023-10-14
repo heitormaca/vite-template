@@ -22,7 +22,7 @@ export const useNavbarItemStyle = createStyles((theme, params: Params) => {
     if (params.active) {
       return theme.colorScheme === 'dark'
         ? `${theme.colors[theme.primaryColor][3]}22`
-        : `${theme.colors[theme.primaryColor][0]}66`;
+        : `${theme.colors[theme.primaryColor][1]}66`;
     }
     return theme.colorScheme === 'light' ? theme.white : theme.colors.dark[5];
   }
@@ -64,6 +64,7 @@ export const useNavbarItemStyle = createStyles((theme, params: Params) => {
     navbarItemLabel: {
       flex: 1,
       color: getLabelColor(),
+      fontWeight: params.active ? 700 : 500,
       display: params.collapsed ? 'none' : 'block',
     },
 

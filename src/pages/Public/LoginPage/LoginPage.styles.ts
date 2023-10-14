@@ -1,5 +1,4 @@
 import { createStyles } from '@mantine/styles';
-import { MantinePrimaryShade } from '@mantine/styles/lib/theme/types/MantineTheme';
 
 export const useLoginPageStyle = createStyles((theme) => ({
   grid: {
@@ -10,10 +9,7 @@ export const useLoginPageStyle = createStyles((theme) => ({
 
   colBrand: {
     minHeight: '100vh',
-    backgroundColor:
-      theme.colors[theme.primaryColor][
-        (theme.primaryShade as MantinePrimaryShade)[theme.colorScheme]
-      ],
+    backgroundColor: theme.colors['secondary'][2],
     [theme.fn.smallerThan('md')]: {
       minHeight: 200,
     },
